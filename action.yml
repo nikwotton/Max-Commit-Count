@@ -1,0 +1,7 @@
+name: 'Max Commit Count'
+description: 'A GitHub action that requires that a PR contain no more than a specified number of commits'
+author: 'Nikolai Wotton'
+inputs:
+  maxCommits:
+    required: true
+    description: 'The maximum number of commits allowed'
