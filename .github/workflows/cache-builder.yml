@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: burrunan/gradle-cache-action@v1
-        name: Setup Gradle Wrapper Cache
-      - name: Build
-        run: ./gradlew assemble --stacktrace --no-daemon
+        name: Build with Cache
+        with:
+          read-only: ${{ github.ref != 'refs/heads/main' }}
+          concurrent: true
+          arguments: assemble --stacktrace --no-daemon
