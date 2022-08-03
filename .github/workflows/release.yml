@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - shell: bash
+        name: "re-attach head"
+        run: |
+          git config --global user.email "automation@example.notARealEmail"
+          git config --global user.name "Automation McBotterson"
+          git config --global pull.rebase true
+          git fetch origin ${{ github.head_ref }}
+          git checkout ${{ github.head_ref }}
       - uses: burrunan/gradle-cache-action@v1
         name: Setup Gradle Wrapper Cache
       - name: Build and Copy JS
@@ -17,8 +25,6 @@ jobs:
       - shell: bash
         name: "Commit changes back to PR"
         run: |
-          git config --global user.email "automation@example.notARealEmail"
-          git config --global user.name "Automation McBotterson"
           git add .
           git commit -m "ci(dist): updating dist code [AUTO-258]"
-          git push -u origin ${GITHUB_REF##*/}
+          git push -u origin ${{ github.head_ref }}
