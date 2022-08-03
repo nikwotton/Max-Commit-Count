@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     // TODO: Go through whether all of these are needed
+    compileOnly(devNpm("google-closure-compiler", "20210808.0.0")) // v20220719
     implementation(npm("@actions/core", "1.4.0"))
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     implementation("io.ktor:ktor-client-js:1.5.4")
@@ -33,31 +34,33 @@ kotlin {
     }
 }
 
-// TODO: Clean up tasks
-
-tasks.register<Copy>("CopyGeneratedNodeModuleToRoot") {
-    from("${buildDir}/js/node_modules") {
-        exclude("**/.bin")
-    }
-    into("$rootDir/node_modules")
-}
-
-tasks.register<Copy>("CopyGeneratedJSToDistribution") {
-    dependsOn("CopyGeneratedNodeModuleToRoot")
+val CopyGeneratedJSToDistribution = tasks.register<Copy>("CopyGeneratedJSToDistribution") {
+    finalizedBy(project(":ncc-packer").tasks.named("run"))
     from("${buildDir}/compileSync/main/productionExecutable/kotlin/milestone-changelog-creator.js") {
         rename("milestone-changelog-creator", "index")
     }
     into("$rootDir/dist")
 }
 
+val optimizeJs = tasks.register<Exec>("optimizeJs") {
+    dependsOn(CopyGeneratedJSToDistribution)
+    val inputFileName = "${rootDir}/dist/index.js"
+    val outputFileName = "${rootDir}/dist/index-optimized.js"
+    inputs.file(inputFileName)
+    outputs.file(outputFileName)
+    outputs.upToDateWhen { true }
+    outputs.cacheIf { true }
+    commandLine(
+        "node",
+        "${File(rootProject.buildDir, "js/node_modules/google-closure-compiler/cli.js")}",
+        "--js=${inputFileName}",
+        "--js_output_file=${outputFileName}",
+        "-O=SIMPLE",
+        "--env=BROWSER",
+        "--warning_level=QUIET",
+    )
+}
+
 tasks.named("assemble") {
-    finalizedBy("CopyGeneratedNodeModuleToRoot")
-}
-
-tasks.named("CopyGeneratedNodeModuleToRoot") {
-    finalizedBy("CopyGeneratedJSToDistribution")
-}
-
-tasks.named("CopyGeneratedJSToDistribution") {
-    finalizedBy(project(":ncc-packer").tasks.named("run"))
+    finalizedBy(optimizeJs)
 }
