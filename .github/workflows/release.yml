@@ -21,4 +21,4 @@ jobs:
           git config --global user.name "Automation McBotterson"
           git add .
           git commit -m "ci(dist): updating dist code [AUTO-258]"
-          git push -u origin $(git rev-parse --abbrev-ref HEAD)
+          git push -u origin ${GITHUB_REF##*/}
