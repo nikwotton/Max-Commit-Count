@@ -15,6 +15,8 @@ kotlin {
                 val outputDir = rootProject.layout.projectDirectory.dir("dist")
                 inputs.file(inputFile)
                 outputs.dir(outputDir)
+                outputs.upToDateWhen { true }
+                outputs.cacheIf { true }
                 args(
                     inputFile,
                     outputDir
