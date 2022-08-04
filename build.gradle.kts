@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     // TODO: Go through whether all of these are needed
-    compileOnly(devNpm("google-closure-compiler", "20210808.0.0")) // v20220719
+    compileOnly(devNpm("google-closure-compiler", "20220719.0.0"))
     implementation(npm("@actions/core", "1.4.0"))
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     implementation("io.ktor:ktor-client-js:1.5.4")
@@ -43,14 +43,17 @@ project(":ncc-packer").afterEvaluate {
 val optimizeJs = tasks.register<Exec>("optimizeJs") {
     dependsOn(project(":ncc-packer").tasks.named("run"))
     val inputFileName = "$rootDir/dist/index.js"
+    val compilerDir = "$buildDir/js/node_modules/google-closure-compiler"
+    val compilerCli = "$compilerDir/cli.js"
     val outputFileName = "$rootDir/dist/index-optimized.js"
     inputs.file(inputFileName)
+    inputs.dir(compilerDir)
     outputs.file(outputFileName)
     outputs.upToDateWhen { true }
     outputs.cacheIf { true }
     commandLine(
         "node",
-        "${File(rootProject.buildDir, "js/node_modules/google-closure-compiler/cli.js")}",
+        compilerCli,
         "--js=${inputFileName}",
         "--js_output_file=${outputFileName}",
         "-O=SIMPLE",
