@@ -15,6 +15,7 @@ repositories {
 
 dependencies {
     // TODO: Go through whether all of these are needed
+    compileOnly(devNpm("google-closure-compiler", "20220719.0.0"))
     implementation(npm("@actions/core", "1.4.0"))
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     implementation("io.ktor:ktor-client-js:1.5.4")
@@ -33,31 +34,34 @@ kotlin {
     }
 }
 
-// TODO: Clean up tasks
+val assemble = tasks.named("assemble")
 
-tasks.register<Copy>("CopyGeneratedNodeModuleToRoot") {
-    from("${buildDir}/js/node_modules") {
-        exclude("**/.bin")
-    }
-    into("$rootDir/node_modules")
+project(":ncc-packer").afterEvaluate {
+    this.tasks.named("run").configure { dependsOn(assemble) }
 }
 
-tasks.register<Copy>("CopyGeneratedJSToDistribution") {
-    dependsOn("CopyGeneratedNodeModuleToRoot")
-    from("${buildDir}/compileSync/main/productionExecutable/kotlin/milestone-changelog-creator.js") {
-        rename("milestone-changelog-creator", "index")
-    }
-    into("$rootDir/dist")
+val optimizeJs = tasks.register<Exec>("optimizeJs") {
+    dependsOn(project(":ncc-packer").tasks.named("run"))
+    val inputFileName = "$rootDir/dist/index.js"
+    val compilerDir = "$buildDir/js/node_modules/google-closure-compiler"
+    val compilerCli = "$compilerDir/cli.js"
+    val outputFileName = "$rootDir/dist/index-optimized.js"
+    inputs.file(inputFileName)
+    inputs.dir(compilerDir)
+    outputs.file(outputFileName)
+    outputs.upToDateWhen { true }
+    outputs.cacheIf { true }
+    commandLine(
+        "node",
+        compilerCli,
+        "--js=${inputFileName}",
+        "--js_output_file=${outputFileName}",
+        "-O=SIMPLE",
+        "--env=BROWSER",
+        "--warning_level=QUIET",
+    )
 }
 
 tasks.named("assemble") {
-    finalizedBy("CopyGeneratedNodeModuleToRoot")
-}
-
-tasks.named("CopyGeneratedNodeModuleToRoot") {
-    finalizedBy("CopyGeneratedJSToDistribution")
-}
-
-tasks.named("CopyGeneratedJSToDistribution") {
-    finalizedBy(project(":ncc-packer").tasks.named("run"))
+    finalizedBy(optimizeJs)
 }

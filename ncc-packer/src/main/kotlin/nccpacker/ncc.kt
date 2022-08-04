@@ -2,7 +2,7 @@ package nccpacker
 
 import Buffer
 import kotlin.js.Promise
-import kotlinext.js.Object
+import kotlinx.js.Object
 
 @JsModule("@vercel/ncc")
 external fun ncc(input: String, options: NccOptions = definedExternally): Promise<NccResult>
