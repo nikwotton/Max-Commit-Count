@@ -34,18 +34,16 @@ kotlin {
     }
 }
 
-val CopyGeneratedJSToDistribution = tasks.register<Copy>("CopyGeneratedJSToDistribution") {
-    finalizedBy(project(":ncc-packer").tasks.named("run"))
-    from("${buildDir}/compileSync/main/productionExecutable/kotlin/milestone-changelog-creator.js") {
-        rename("milestone-changelog-creator", "index")
-    }
-    into("$rootDir/dist")
+val assemble = tasks.named("assemble")
+
+project(":ncc-packer").afterEvaluate {
+    this.tasks.named("run").configure { dependsOn(assemble) }
 }
 
 val optimizeJs = tasks.register<Exec>("optimizeJs") {
-    dependsOn(CopyGeneratedJSToDistribution)
-    val inputFileName = "${rootDir}/dist/index.js"
-    val outputFileName = "${rootDir}/dist/index-optimized.js"
+    dependsOn(project(":ncc-packer").tasks.named("run"))
+    val inputFileName = "$rootDir/dist/index.js"
+    val outputFileName = "$rootDir/dist/index-optimized.js"
     inputs.file(inputFileName)
     outputs.file(outputFileName)
     outputs.upToDateWhen { true }

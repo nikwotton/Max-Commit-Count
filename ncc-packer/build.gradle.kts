@@ -10,10 +10,14 @@ kotlin {
         binaries.executable()
         nodejs {
             runTask {
-                val path = rootProject.layout.projectDirectory.dir("dist")
+                val inputFile =
+                    "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/Max-Commit-Count.js"
+                val outputDir = rootProject.layout.projectDirectory.dir("dist")
+                inputs.file(inputFile)
+                outputs.dir(outputDir)
                 args(
-                    path, // input
-                    path.asFile.absolutePath // output
+                    inputFile,
+                    outputDir
                 )
             }
         }
