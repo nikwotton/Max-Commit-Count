@@ -8,7 +8,7 @@ fun main() {
     val inputs = resolveInputs()
     print("$inputs")
     try {
-        println("Hello World!")
+        println("Hello World From GitHub Actions!")
     } catch (e: Exception) {
         failOrError(e.message ?: "Error while generating changelog")
     }
