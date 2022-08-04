@@ -33,7 +33,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
     var inputs = resolveInputs();
     print('' + inputs);
     try {
-      println('Hello World!');
+      println('Hello World From GitHub Actions!');
     } catch ($p) {
       if ($p instanceof Exception) {
         var tmp0_elvis_lhs = $p.message;
