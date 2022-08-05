@@ -11,8 +11,8 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
   var getInput = $module$_actions_core_fx0i1v.getInput;
   var endGroup = $module$_actions_core_fx0i1v.endGroup;
   var setFailed = $module$_actions_core_fx0i1v.setFailed;
-  var print = kotlin_kotlin.$_$.c;
   var println = kotlin_kotlin.$_$.b;
+  var print = kotlin_kotlin.$_$.c;
   var Exception = kotlin_kotlin.$_$.l;
   var toInt = kotlin_kotlin.$_$.k;
   var charSequenceLength = kotlin_kotlin.$_$.e;
@@ -30,6 +30,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
   ActionFailedException.prototype.constructor = ActionFailedException;
   //endregion
   function main() {
+    println('HIT THE FUCKING ENTRY POINT');
     var inputs = resolveInputs();
     print('' + inputs);
     try {
@@ -529,13 +530,13 @@ if (typeof Math.imul === 'undefined') {
     tmp.o_1 = tmp_0 + tmp$ret$0;
   };
   BufferedOutput.$metadata$ = classMeta('BufferedOutput', undefined, undefined, undefined, undefined, BaseOutput.prototype);
-  function print(message) {
-    init_properties_console_kt_6h8hpf();
-    get_output().k(message);
-  }
   function println(message) {
     init_properties_console_kt_6h8hpf();
     get_output().l(message);
+  }
+  function print(message) {
+    init_properties_console_kt_6h8hpf();
+    get_output().k(message);
   }
   var properties_initialized_console_kt_gll9dl;
   function init_properties_console_kt_6h8hpf() {

@@ -5,6 +5,7 @@ import utils.actions.group
 import utils.failOrError
 
 fun main() {
+    println("HIT THE FUCKING ENTRY POINT")
     val inputs = resolveInputs()
     print("$inputs")
     try {
