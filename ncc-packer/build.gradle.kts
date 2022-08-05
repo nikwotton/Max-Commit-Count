@@ -4,21 +4,41 @@ plugins {
     kotlin("js")
 }
 
+val tmpDir = "${rootProject.buildDir}/js/tmpDir/"
+
+val copyDir = tasks.register("copyDir") {
+    val inputDir = "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/"
+    val outputDir = tmpDir
+    inputs.dir(inputDir)
+    outputs.dir(outputDir)
+    outputs.upToDateWhen { true }
+    outputs.cacheIf { true }
+    doLast {
+        val output = File(outputDir)
+        if (output.exists())
+            output.deleteRecursively()
+        File(inputDir).copyRecursively(output, overwrite = true)
+        val originIndex = File("$outputDir/Max-Commit-Count.js")
+        originIndex.copyTo(File("$outputDir/index.js"))
+        originIndex.delete()
+    }
+}
+
 kotlin {
     js(LEGACY) {
         useCommonJs()
         binaries.executable()
         nodejs {
             runTask {
-                val inputFile =
-                    "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/Max-Commit-Count.js"
+                dependsOn(copyDir)
+                val inputFile = tmpDir
                 val outputDir = rootProject.layout.projectDirectory.dir("dist")
-                inputs.file(inputFile)
+                inputs.dir(inputFile)
                 outputs.dir(outputDir)
                 outputs.upToDateWhen { true }
                 outputs.cacheIf { true }
                 args(
-                    inputFile,
+                    "$inputFile/index.js",
                     outputDir
                 )
             }

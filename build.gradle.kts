@@ -42,11 +42,11 @@ project(":ncc-packer").afterEvaluate {
 
 val optimizeJs = tasks.register<Exec>("optimizeJs") {
     dependsOn(project(":ncc-packer").tasks.named("run"))
-    val inputFileName = "$rootDir/dist/index.js"
+    val indexFileName = "$rootDir/dist/index.js"
     val compilerDir = "$buildDir/js/node_modules/google-closure-compiler"
     val compilerCli = "$compilerDir/cli.js"
     val outputFileName = "$rootDir/dist/index-optimized.js"
-    inputs.file(inputFileName)
+    inputs.file(indexFileName)
     inputs.dir(compilerDir)
     outputs.file(outputFileName)
     outputs.upToDateWhen { true }
@@ -54,11 +54,9 @@ val optimizeJs = tasks.register<Exec>("optimizeJs") {
     commandLine(
         "node",
         compilerCli,
-        "--js=${inputFileName}",
+        "--js=${indexFileName}",
         "--js_output_file=${outputFileName}",
-        "-O=SIMPLE",
-        "--env=BROWSER",
-        "--warning_level=QUIET",
+        "-O=WHITESPACE_ONLY",
     )
 }
 

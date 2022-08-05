@@ -13,7 +13,7 @@ suspend fun main() {
     runCatching {
         val (input, output) = process.argv.filterIndexed { i, _ -> i > 1 }
         val result = ncc(input, jso {
-            sourceMap = true
+            sourceMap = false
             license = "LICENSES"
         }).await()
 
