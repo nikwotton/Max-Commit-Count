@@ -1,7 +1,7 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 103:
+/***/ 747:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 (function (_, $module$_actions_core_fx0i1v, process, kotlin_kotlin) {
@@ -186,13 +186,13 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
   }
   main();
   return _;
-}(module.exports, __nccwpck_require__(425), __nccwpck_require__(282), __nccwpck_require__(972)));
+}(module.exports, __nccwpck_require__(446), __nccwpck_require__(282), __nccwpck_require__(869)));
 
 //# sourceMappingURL=Max-Commit-Count.js.map
 
 /***/ }),
 
-/***/ 972:
+/***/ 869:
 /***/ ((module) => {
 
 //region block: polyfills
@@ -1956,7 +1956,7 @@ if (typeof Math.imul === 'undefined') {
 
 /***/ }),
 
-/***/ 782:
+/***/ 352:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1983,7 +1983,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(309);
+const utils_1 = __nccwpck_require__(740);
 /**
  * Commands
  *
@@ -2055,7 +2055,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 425:
+/***/ 446:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -2090,9 +2090,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(782);
-const file_command_1 = __nccwpck_require__(166);
-const utils_1 = __nccwpck_require__(309);
+const command_1 = __nccwpck_require__(352);
+const file_command_1 = __nccwpck_require__(703);
+const utils_1 = __nccwpck_require__(740);
 const os = __importStar(__nccwpck_require__(37));
 const path = __importStar(__nccwpck_require__(17));
 /**
@@ -2356,7 +2356,7 @@ exports.getState = getState;
 
 /***/ }),
 
-/***/ 166:
+/***/ 703:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -2387,7 +2387,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(147));
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(309);
+const utils_1 = __nccwpck_require__(740);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -2405,7 +2405,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 309:
+/***/ 740:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -2506,7 +2506,7 @@ module.exports = require("process");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(103);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(747);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
