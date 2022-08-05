@@ -57,7 +57,7 @@ val optimizeJs = tasks.register<Exec>("optimizeJs") {
         compilerCli,
         "--js=${indexFileName}",
         "--js_output_file=${outputFileName}",
-        "-O=SIMPLE",
+        "-O=WHITESPACE_ONLY",
     )
 }
 
