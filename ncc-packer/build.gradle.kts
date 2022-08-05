@@ -24,19 +24,19 @@ val copyDir = tasks.register("copyDir") {
     }
 }
 
-val copyNodes = tasks.register("copyNodes") {
-    val inputDir = "${rootProject.buildDir}/js/node_modules"
-    val outputDir = "${rootProject.rootDir}/node_modules"
-//    inputs.dir(inputDir)
-//    outputs.dir(outputDir)
-//    outputs.upToDateWhen { true }
-//    outputs.cacheIf { true }
-    doLast {
-        val output = File(outputDir)
-        output.deleteRecursively()
-        File(inputDir).copyRecursively(output, overwrite = true)
-    }
-}
+//val copyNodes = tasks.register("copyNodes") {
+//    val inputDir = "${rootProject.buildDir}/js/node_modules"
+//    val outputDir = "${rootProject.rootDir}/node_modules"
+////    inputs.dir(inputDir)
+////    outputs.dir(outputDir)
+////    outputs.upToDateWhen { true }
+////    outputs.cacheIf { true }
+//    doLast {
+//        val output = File(outputDir)
+//        output.deleteRecursively()
+//        File(inputDir).copyRecursively(output, overwrite = true)
+//    }
+//}
 
 kotlin {
     js(LEGACY) {
@@ -45,7 +45,7 @@ kotlin {
         nodejs {
             runTask {
                 dependsOn(copyDir)
-                dependsOn(copyNodes)
+//                dependsOn(copyNodes)
                 val inputFile = tmpDir
                 val outputDir = rootProject.layout.projectDirectory.dir("dist")
                 inputs.dir(inputFile)
