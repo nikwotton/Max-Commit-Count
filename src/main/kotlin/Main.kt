@@ -16,16 +16,12 @@ fun main() {
 }
 
 fun resolveInputs() = group("Reading input values") {
-    println("Resolving Inputs")
     val inputString =
         getInput("maxCommits").ifEmpty { throw IllegalArgumentException("Don't forget to define maxCommits") }
-    println("Got input string: $inputString")
-    println("Number version: ${inputString.toInt()}")
-
-    val maxCommits = (getInput("maxCommits") ?: "").toInt()
+    val inputNumber = inputString.toIntOrNull() ?: throw IllegalArgumentException("$inputString is not a valid number")
     val token = getInput("token").ifEmpty { ActionsEnvironment.GITHUB_TOKEN }
     return@group Inputs(
-        maxCommits = maxCommits,
+        maxCommits = inputNumber,
         token = token
     )
 }

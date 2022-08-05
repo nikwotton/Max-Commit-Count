@@ -493,7 +493,7 @@ exports.toCommandValue = toCommandValue;
   var charSequenceLength = kotlin_kotlin.$_$.f;
   var Unit_getInstance = kotlin_kotlin.$_$.b;
   var IllegalArgumentException_init_$Create$ = kotlin_kotlin.$_$.a;
-  var toInt = kotlin_kotlin.$_$.l;
+  var toIntOrNull = kotlin_kotlin.$_$.l;
   var THROW_CCE = kotlin_kotlin.$_$.n;
   var classMeta = kotlin_kotlin.$_$.g;
   var captureStack = kotlin_kotlin.$_$.e;
@@ -528,7 +528,6 @@ exports.toCommandValue = toCommandValue;
       try {
         var tmp$ret$5;
         {
-          println('Resolving Inputs');
           var tmp$ret$1;
           {
             var tmp0_ifEmpty = getInput('maxCommits');
@@ -545,14 +544,18 @@ exports.toCommandValue = toCommandValue;
             tmp$ret$1 = tmp;
           }
           var inputString = tmp$ret$1;
-          println('Got input string: ' + inputString);
-          println('Number version: ' + toInt(inputString));
-          var tmp0_elvis_lhs = getInput('maxCommits');
-          var maxCommits = toInt(tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs);
+          var tmp0_elvis_lhs = toIntOrNull(inputString);
+          var tmp_0;
+          if (tmp0_elvis_lhs == null) {
+            throw IllegalArgumentException_init_$Create$(inputString + ' is not a valid number');
+          } else {
+            tmp_0 = tmp0_elvis_lhs;
+          }
+          var inputNumber = tmp_0;
           var tmp$ret$4;
           {
             var tmp1_ifEmpty = getInput('token');
-            var tmp_0;
+            var tmp_1;
             var tmp$ret$2;
             {
               tmp$ret$2 = charSequenceLength(tmp1_ifEmpty) === 0;
@@ -562,14 +565,14 @@ exports.toCommandValue = toCommandValue;
               {
                 tmp$ret$3 = ActionsEnvironment_getInstance().f2();
               }
-              tmp_0 = tmp$ret$3;
+              tmp_1 = tmp$ret$3;
             } else {
-              tmp_0 = tmp1_ifEmpty;
+              tmp_1 = tmp1_ifEmpty;
             }
-            tmp$ret$4 = tmp_0;
+            tmp$ret$4 = tmp_1;
           }
           var token = tmp$ret$4;
-          tmp$ret$5 = new Inputs(maxCommits, token);
+          tmp$ret$5 = new Inputs(inputNumber, token);
         }
         tmp$ret$6 = tmp$ret$5;
         break $l$block;
@@ -723,8 +726,6 @@ if (typeof Math.imul === 'undefined') {
   IllegalArgumentException.prototype.constructor = IllegalArgumentException;
   IllegalStateException.prototype = Object.create(RuntimeException.prototype);
   IllegalStateException.prototype.constructor = IllegalStateException;
-  NumberFormatException.prototype = Object.create(IllegalArgumentException.prototype);
-  NumberFormatException.prototype.constructor = NumberFormatException;
   NullPointerException.prototype = Object.create(RuntimeException.prototype);
   NullPointerException.prototype.constructor = NullPointerException;
   ClassCastException.prototype = Object.create(RuntimeException.prototype);
@@ -816,9 +817,6 @@ if (typeof Math.imul === 'undefined') {
       }
        while (inductionVariable < length);
     return isNegative ? result : -result | 0;
-  }
-  function numberFormatError(input) {
-    throw NumberFormatException_init_$Create$("Invalid number format: '" + input + "'");
   }
   function isEmpty(_this__u8e3s4) {
     return charSequenceLength(_this__u8e3s4) === 0;
@@ -1146,16 +1144,6 @@ if (typeof Math.imul === 'undefined') {
       throw IllegalArgumentException_init_$Create$('radix ' + radix + ' was not in valid range 2..36');
     }
     return radix;
-  }
-  function toInt(_this__u8e3s4) {
-    var tmp0_elvis_lhs = toIntOrNull(_this__u8e3s4);
-    var tmp;
-    if (tmp0_elvis_lhs == null) {
-      numberFormatError(_this__u8e3s4);
-    } else {
-      tmp = tmp0_elvis_lhs;
-    }
-    return tmp;
   }
   function digitOf(char, radix) {
     var tmp$ret$1;
@@ -2360,20 +2348,6 @@ if (typeof Math.imul === 'undefined') {
     captureStack(this, IllegalStateException);
   }
   IllegalStateException.$metadata$ = classMeta('IllegalStateException', undefined, undefined, undefined, undefined, RuntimeException.prototype);
-  function NumberFormatException_init_$Init$(message, $this) {
-    IllegalArgumentException_init_$Init$(message, $this);
-    NumberFormatException.call($this);
-    return $this;
-  }
-  function NumberFormatException_init_$Create$(message) {
-    var tmp = NumberFormatException_init_$Init$(message, Object.create(NumberFormatException.prototype));
-    captureStack(tmp, NumberFormatException_init_$Create$);
-    return tmp;
-  }
-  function NumberFormatException() {
-    captureStack(this, NumberFormatException);
-  }
-  NumberFormatException.$metadata$ = classMeta('NumberFormatException', undefined, undefined, undefined, undefined, IllegalArgumentException.prototype);
   function NullPointerException_init_$Init$($this) {
     RuntimeException_init_$Init$($this);
     NullPointerException.call($this);
@@ -2445,7 +2419,7 @@ if (typeof Math.imul === 'undefined') {
   _.$_$.i = getPropertyCallableRef;
   _.$_$.j = objectMeta;
   _.$_$.k = KProperty1;
-  _.$_$.l = toInt;
+  _.$_$.l = toIntOrNull;
   _.$_$.m = Exception;
   _.$_$.n = THROW_CCE;
   //endregion
