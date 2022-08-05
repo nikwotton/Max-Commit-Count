@@ -40,7 +40,6 @@ project(":ncc-packer").afterEvaluate {
     this.tasks.named("run").configure { dependsOn(assemble) }
 }
 
-// TODO: Figure out how to make this work...
 val optimizeJs = tasks.register<Exec>("optimizeJs") {
     dependsOn(project(":ncc-packer").tasks.named("run"))
     val indexFileName = "$rootDir/dist/index.js"
@@ -57,7 +56,7 @@ val optimizeJs = tasks.register<Exec>("optimizeJs") {
         compilerCli,
         "--js=${indexFileName}",
         "--js_output_file=${outputFileName}",
-        "-O=SIMPLE_OPTIMIZATIONS",
+        "-O=WHITESPACE_ONLY",
     )
 }
 
