@@ -20,6 +20,7 @@ fun resolveInputs() = group("Reading input values") {
     val inputString = getInput("maxCommits")
     println("Got input string: $inputString")
     println("Number version: ${inputString.toInt()}")
+
     val maxCommits = (getInput("maxCommits") ?: "").toInt()
     val token = getInput("token").ifEmpty { ActionsEnvironment.GITHUB_TOKEN }
     return@group Inputs(
