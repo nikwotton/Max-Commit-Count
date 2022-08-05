@@ -17,7 +17,8 @@ fun main() {
 
 fun resolveInputs() = group("Reading input values") {
     println("Resolving Inputs")
-    val inputString = getInput("maxCommits")
+    val inputString =
+        getInput("maxCommits").ifEmpty { throw IllegalArgumentException("Don't forget to define maxCommits") }
     println("Got input string: $inputString")
     println("Number version: ${inputString.toInt()}")
 
