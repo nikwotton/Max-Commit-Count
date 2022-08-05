@@ -1,7 +1,7 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 514:
+/***/ 97:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 (function (_, $module$_actions_core_fx0i1v, process, kotlin_kotlin) {
@@ -187,13 +187,13 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
   }
   main();
   return _;
-}(module.exports, __nccwpck_require__(328), __nccwpck_require__(282), __nccwpck_require__(105)));
+}(module.exports, __nccwpck_require__(328), __nccwpck_require__(282), __nccwpck_require__(943)));
 
 //# sourceMappingURL=Max-Commit-Count.js.map
 
 /***/ }),
 
-/***/ 105:
+/***/ 943:
 /***/ ((module) => {
 
 //region block: polyfills
@@ -2015,7 +2015,7 @@ module.exports = require("process");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(514);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(97);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()

@@ -4,7 +4,7 @@ plugins {
     kotlin("js")
 }
 
-val tmpDir = "${rootProject.buildDir}/dist-temp"
+val tmpDir = "${rootProject.buildDir}/compileSyncCopy/main/productionExecutable/kotlin/"
 
 val copyDir = tasks.register("copyDir") {
     val inputDir = "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/"
