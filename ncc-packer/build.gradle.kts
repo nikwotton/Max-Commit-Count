@@ -4,25 +4,25 @@ plugins {
     kotlin("js")
 }
 
-//val tmpDir = "${rootProject.rootDir}/dist-temp"
+val tmpDir = "${rootProject.buildDir}/dist-temp"
 
-//val copyDir = tasks.register("copyDir") {
-//    val inputDir = "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/"
-//    val outputDir = tmpDir
-//    inputs.dir(inputDir)
-//    outputs.dir(outputDir)
-//    outputs.upToDateWhen { true }
-//    outputs.cacheIf { true }
-//    doLast {
-//        val output = File(outputDir)
-//        if (output.exists())
-//            output.deleteRecursively()
-//        File(inputDir).copyRecursively(output, overwrite = true)
-//        val originIndex = File("$outputDir/Max-Commit-Count.js")
-//        originIndex.copyTo(File("$outputDir/index.js"))
-//        originIndex.delete()
-//    }
-//}
+val copyDir = tasks.register("copyDir") {
+    val inputDir = "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/"
+    val outputDir = tmpDir
+    inputs.dir(inputDir)
+    outputs.dir(outputDir)
+    outputs.upToDateWhen { true }
+    outputs.cacheIf { true }
+    doLast {
+        val output = File(outputDir)
+        if (output.exists())
+            output.deleteRecursively()
+        File(inputDir).copyRecursively(output, overwrite = true)
+        val originIndex = File("$outputDir/Max-Commit-Count.js")
+        originIndex.copyTo(File("$outputDir/index.js"))
+        originIndex.delete()
+    }
+}
 
 kotlin {
     js(LEGACY) {
@@ -31,7 +31,7 @@ kotlin {
         nodejs {
             runTask {
                 dependsOn(copyDir)
-                val inputFile = "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/"
+                val inputFile = tmpDir
                 val outputDir = rootProject.layout.projectDirectory.dir("dist")
                 inputs.dir(inputFile)
                 outputs.dir(outputDir)
