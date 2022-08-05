@@ -40,6 +40,7 @@ project(":ncc-packer").afterEvaluate {
     this.tasks.named("run").configure { dependsOn(assemble) }
 }
 
+// TODO: Figure out how to make this work...
 val optimizeJs = tasks.register<Exec>("optimizeJs") {
     dependsOn(project(":ncc-packer").tasks.named("run"))
     val inputFileName = "$rootDir/dist/index.js"
