@@ -527,11 +527,16 @@ exports.toCommandValue = toCommandValue;
       try {
         var tmp$ret$3;
         {
-          var tmp = toInt(getInput('maxCommits'));
+          println('Resolving Inputs');
+          var inputString = getInput('maxCommits');
+          println('Got input string: ' + inputString);
+          println('Number version: ' + toInt(inputString));
+          var tmp0_elvis_lhs = getInput('maxCommits');
+          var maxCommits = toInt(tmp0_elvis_lhs == null ? '' : tmp0_elvis_lhs);
           var tmp$ret$2;
           {
             var tmp0_ifEmpty = getInput('token');
-            var tmp_0;
+            var tmp;
             var tmp$ret$0;
             {
               tmp$ret$0 = charSequenceLength(tmp0_ifEmpty) === 0;
@@ -541,13 +546,14 @@ exports.toCommandValue = toCommandValue;
               {
                 tmp$ret$1 = ActionsEnvironment_getInstance().f2();
               }
-              tmp_0 = tmp$ret$1;
+              tmp = tmp$ret$1;
             } else {
-              tmp_0 = tmp0_ifEmpty;
+              tmp = tmp0_ifEmpty;
             }
-            tmp$ret$2 = tmp_0;
+            tmp$ret$2 = tmp;
           }
-          tmp$ret$3 = new Inputs(tmp, tmp$ret$2);
+          var token = tmp$ret$2;
+          tmp$ret$3 = new Inputs(maxCommits, token);
         }
         tmp$ret$4 = tmp$ret$3;
         break $l$block;
