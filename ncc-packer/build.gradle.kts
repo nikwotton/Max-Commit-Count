@@ -37,6 +37,6 @@ dependencies {
     implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.363")
     implementation(npm("@vercel/ncc", "0.34.0", generateExternals = false))
 }
-
+// test
 val TaskContainer.compileKotlinJs
     get() = named<Kotlin2JsCompile>("compileKotlinJs")
