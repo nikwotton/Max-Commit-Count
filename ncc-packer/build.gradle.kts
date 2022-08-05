@@ -8,7 +8,7 @@ val tmpDir = "${rootProject.buildDir}/customTmp"
 
 val copyDir = tasks.register("copyDir") {
     val inputDir = "${rootProject.buildDir}/compileSync/main/productionExecutable/kotlin/"
-    val outputDir = tmpDir
+    val outputDir = "$tmpDir/indexDir"
     inputs.dir(inputDir)
     outputs.dir(outputDir)
     outputs.upToDateWhen { true }
@@ -23,6 +23,20 @@ val copyDir = tasks.register("copyDir") {
     }
 }
 
+val copyNodes = tasks.register("copyNodes") {
+    val inputDir = "${rootProject.buildDir}/js/node_modules"
+    val outputDir = "$tmpDir/node_modules"
+    inputs.dir(inputDir)
+    outputs.dir(outputDir)
+    outputs.upToDateWhen { true }
+    outputs.cacheIf { true }
+    doLast {
+        val output = File(outputDir)
+        output.deleteRecursively()
+        File(inputDir).copyRecursively(output, overwrite = true)
+    }
+}
+
 kotlin {
     js(LEGACY) {
         useCommonJs()
@@ -30,6 +44,7 @@ kotlin {
         nodejs {
             runTask {
                 dependsOn(copyDir)
+                dependsOn(copyNodes)
                 val inputFile = tmpDir
                 val outputDir = rootProject.layout.projectDirectory.dir("dist")
                 inputs.dir(inputFile)
@@ -37,7 +52,7 @@ kotlin {
                 outputs.upToDateWhen { true }
                 outputs.cacheIf { true }
                 args(
-                    inputFile,
+                    "$inputFile/indexDir/index.js",
                     outputDir
                 )
             }
