@@ -1,0 +1,16 @@
+name: Testing Self
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  testing-self:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nikwotton/Max-Commit-Count@test/self
+        with:
+          maxCommits: 3
+          token: ${{ secrets.GITHUB_TOKEN }}

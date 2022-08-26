@@ -29,6 +29,15 @@ jobs:
       - shell: bash
         name: "Commit changes back to PR"
         run: |
+          git fetch
+          git diff ${{ github.head_ref }} "origin/${{ github.head_ref }}" --exit-code || {
+              echo "A new commit was pushed to this branch before this action completed"
+              exit 1
+          }
+          [[ "$(git log -1 --pretty=format:'%ae')" == "automation@example.notARealEmail" ]] && {
+              echo "The last commit was already made by automation"
+              exit 0
+          }
           git diff --exit-code || {
             git add .
             git commit -m "ci(dist): updating dist code [AUTO-258]"

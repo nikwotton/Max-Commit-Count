@@ -52,7 +52,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-extensions:1.0.1-pre.363")
     implementation(npm("@vercel/ncc", "0.34.0", generateExternals = false))
