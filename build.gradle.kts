@@ -15,10 +15,12 @@ repositories {
 dependencies {
     compileOnly(devNpm("google-closure-compiler", "20220803.0.0"))
     implementation(npm("@actions/core", "1.4.0"))
-    val ktorVersion = "1.5.4"
+    val ktorVersion = "1.6.0"
     implementation("io.ktor:ktor-client-js:$ktorVersion")
     implementation("io.ktor:ktor-client-serialization:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.4")
 }
 
 kotlin {
