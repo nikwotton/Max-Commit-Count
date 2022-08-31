@@ -33,6 +33,7 @@ suspend fun main() {
     if (numCommits > inputs.maxCommits) {
         setFailed("Your PR contains $numCommits commits, but you are only allowed up to ${inputs.maxCommits} per PR")
     }
+    println("You are allowed ${inputs.maxCommits} commits and you only have $numCommits. Passed!")
 }
 
 fun resolveInputs(): Inputs {
