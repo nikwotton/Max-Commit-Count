@@ -16,7 +16,7 @@ jobs:
   testing-self:
     runs-on: ubuntu-latest
     steps:
-      - uses: nikwotton/Max-Commit-Count
+      - uses: nikwotton/Max-Commit-Count@latest
         with:
           maxCommits: 3
           token: ${{ secrets.GITHUB_TOKEN }}
