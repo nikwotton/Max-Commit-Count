@@ -229,14 +229,6 @@ diff@5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
-dukat@0.5.8-rc.3:
-  version "0.5.8-rc.3"
-  resolved "https://registry.yarnpkg.com/dukat/-/dukat-0.5.8-rc.3.tgz#4a2b848b9d2978cb610af8d5cf24ff5e5a408743"
-  integrity sha512-wzl9A5alTT1Mag4y7bUVjPF4L/wkts7AiiWxe6/6tL5gSDowexUzlJX/pYVTbnHcOo48/bok3Ao1gzU4/cFFjw==
-  dependencies:
-    google-protobuf "3.12.2"
-    typescript "3.9.5"
-
 dukat@0.5.8-rc.4:
   version "0.5.8-rc.4"
   resolved "https://registry.yarnpkg.com/dukat/-/dukat-0.5.8-rc.4.tgz#90384dcb50b14c26f0e99dae92b2dea44f5fce21"
