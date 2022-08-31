@@ -26,5 +26,5 @@ jobs:
 
 The only fields required (and allowed) by this action are:
 
-- `maxCommits`: The maximum number of commits you want to exist in a PR
+- `maxCommits`: The maximum number of commits you want to exist in a PR, inclusive.
 - `token`: The GitHub token to be used for querying the number of commits in the PR.  
